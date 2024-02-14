@@ -53,12 +53,7 @@ public class DBManager : MonoBehaviour
                 }
             }
         }
-
-
-        //DisplayText(json);
-
-
-        
+        //DisplayText(json);       
     }
 
     private void DisplayText(string json)

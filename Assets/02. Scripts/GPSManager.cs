@@ -8,7 +8,6 @@ public class GPSTextDisplay : MonoBehaviour
     public Text latitudeText; // 위도를 표시할 텍스트 UI
     public Text longitudeText; // 경도를 표시할 텍스트 UI
 
-    public POIData POIData = new POIData("제물포 시장", "설명", 1, 1, 1);
 
     IEnumerator Start()
     {

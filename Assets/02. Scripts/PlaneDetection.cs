@@ -32,8 +32,8 @@ public class PlaneDetection : MonoBehaviour
         CastRayByScreenTouch();
         ZoomInOutObjectByPinch();
 
-        //CastRayByScreenClick();
-        //ZoomInOutObjectByWheel();
+        CastRayByScreenClick();
+        ZoomInOutObjectByWheel();
     }
 
     void CastRayFromScreenCenter()
@@ -124,32 +124,15 @@ public class PlaneDetection : MonoBehaviour
         }
     }
 
-    void ZoomInOutObjectByWheel()
-    {
-        
-        if(Input.mouseScrollDelta.y != 0)
-        {
-            float scroll = Input.mouseScrollDelta.y;
-            if(modelPrefab != null)
-            {
-                modelPrefab.transform.localScale += Vector3.one * scroll * zoomSpeed;
-                modelPrefab.transform.localScale = new Vector3(
-                    Mathf.Clamp(modelPrefab.transform.localScale.x, 0.1f, 5f),
-                    Mathf.Clamp(modelPrefab.transform.localScale.y, 0.1f, 5f),
-                    Mathf.Clamp(modelPrefab.transform.localScale.z, 0.1f, 5f));
-            }
-        }
-    }
-
     void CastRayByScreenClick()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Vector2 clickPosition = Input.mousePosition;
             List<ARRaycastHit> hitinfo = new List<ARRaycastHit>();
             if (raycastManager.Raycast(clickPosition, hitinfo, TrackableType.Planes))
             {
-                if(instantiatedObject != null)
+                if (instantiatedObject != null)
                 {
                     Destroy(instantiatedObject);
                 }
@@ -161,4 +144,22 @@ public class PlaneDetection : MonoBehaviour
             }
         }
     }
+
+    void ZoomInOutObjectByWheel()
+    {
+        
+        if(Input.mouseScrollDelta.y != 0)
+        {
+            float scroll = Input.mouseScrollDelta.y;
+            if(instantiatedObject != null)
+            {
+                instantiatedObject.transform.localScale += Vector3.one * scroll * zoomSpeed;
+                instantiatedObject.transform.localScale = new Vector3(
+                    Mathf.Clamp(instantiatedObject.transform.localScale.x, 0.1f, 5f),
+                    Mathf.Clamp(instantiatedObject.transform.localScale.y, 0.1f, 5f),
+                    Mathf.Clamp(instantiatedObject.transform.localScale.z, 0.1f, 5f));
+            }
+        }
+    }
+
 }
